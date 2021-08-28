@@ -6,7 +6,9 @@ from short.models import URL
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
-# Create your views here.
+import redis
+
+rds = redis.Redis(host='localhost', port=6379, db=0)
 
 def home(request):
     current_site = get_current_site(request)
@@ -38,7 +40,7 @@ def short_url(request):
     }
     return JsonResponse(data)
 
-def redirect(request, hash_id=None):
+def redirector(request, hash_id=None):
     hash_code = rds.get(hash_id)
     if hash_code is not None:
         return redirect(hash_code.decode('ascii'))
