@@ -1,0 +1,1 @@
+wc -l access_log.txt

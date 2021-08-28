@@ -1,0 +1,1 @@
+awk '$4 >= "[10/Jun/2020:00:00" && $4 <= "[19/Jun/2019:23:59" {print $1}' ./access_log.txt | sort | uniq -c | sort -nr | head -n 10
